@@ -14,6 +14,10 @@ const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.send('Server is running!');
+});
+
 app.post('/api/summarize', async (req, res) => {
   console.log('Request received:', req.body);
   const { text } = req.body;
