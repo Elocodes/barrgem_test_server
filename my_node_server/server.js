@@ -26,11 +26,14 @@ app.post('/api/summarize', async (req, res) => {
   }
 
   try {
-    const result = await model.generateContent({ prompt: text });
+    // Wrap the text in an array for the prompt
+    const prompt = [{ text }];
+    const result = await model.generateContent({ prompt });
     const response = await result.response;
     const summary = response.text();
-    console.log('Summary:', summary);
-    res.json({ summary });
+    console.log(summary)
+    //console.log('Summary:', summary);
+    //res.json({ summary });
   } catch (error) {
     console.error('Error summarizing text:', error);
     res.status(500).json({ error: 'Failed to summarize text' });
